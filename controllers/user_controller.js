@@ -9,12 +9,21 @@ module.exports.profile = function(req,res){
 }
 // render the sign up and sign in page
 module.exports.signUp = function(req,res){
+
+    if(req.isAuthenticated()){
+       return res.redirect('/user/profile')
+    }
     return res.render('user_sign_up',{
         title : "Email Auth| sign up"
     })
 }
 
 module.exports.signIn = function(req,res){
+
+    
+    if(req.isAuthenticated()){
+        return res.redirect('/user/profile')
+    }
     return res.render('user_sign_in',{
         title : "Email Auth| sign in"
     })
@@ -40,4 +49,15 @@ module.exports.create = function(req,res){
             return res.redirect('back');
         }
     }) ;   
+}
+
+//sign in and create a session for the user
+module.exports.createSession = function(req,res){
+    return res.redirect('/');
+}
+
+module.exports.destroySession = function(req,res){
+
+    req.logout();
+    return res.redirect('/');
 }

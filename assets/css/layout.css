@@ -1,5 +1,6 @@
-body{
-    margin: 0;
-    text-align: center;
-    background-color: blue;
-}
+body {
+  margin: 0;
+  background-color: #c5c5ca; }
+
+#layout-main {
+  height: 100%; }
