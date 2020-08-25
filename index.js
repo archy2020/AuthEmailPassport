@@ -9,7 +9,7 @@ const db = require('./config/mongoose');
 //used for session cookie
 const session = require('express-session');
 const passport = require('passport');
-const passportLocal = require('./config/passport-local-srategy');
+const passportLocal = require('./config/passport-local-strategy');
 
 const MongoStore = require('connect-mongo')(session);
 const saasMiddleware = require('node-sass-middleware');
@@ -59,7 +59,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(passport.setAuthenticated);
+app.use(passport.setAuthenticatedUser);
 
 // use express router
 app.use('/',require('./routes'));

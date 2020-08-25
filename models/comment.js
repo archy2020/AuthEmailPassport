@@ -5,7 +5,7 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
+// comment belong to user
     user :{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'User'
@@ -13,7 +13,7 @@ const commentSchema = new mongoose.Schema({
 
     post :{
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'post'
+        ref : 'Post'
     }
 },{
     timestamps: true
