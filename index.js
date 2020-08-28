@@ -29,6 +29,9 @@ app.set(' layout extractStyles',true);
 app.set(' layout extractScripts',true);
 
 app.use(express.static('assets'));
+//make the uploads path avalbl to the user
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
 // set view
 app.set('view engine','ejs');
 app.set('views','./views');

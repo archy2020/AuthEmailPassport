@@ -11,14 +11,46 @@ module.exports.profile = function(req,res){
     
  });
 }
+// commented to convert into async await for avatar
+// module.exports.update = function(req,res){
+//     if(req.user.id == req.params.id){
 
-module.exports.update = function(req,res){
+//         User.findByIdAndUpdate(req.params.id, req.body , function(err,user){
+//             return res.redirect('back');
+//         });
+//     } else {
+//         return res.status(401).send('Unauthorized');
+//     }
+//    }
+
+module.exports.update = async function(req,res){
     if(req.user.id == req.params.id){
+        try{
+            let user = await User.findById(req.params.id);
+            User.uplodedAvatar(req,res,function(err){
+                if(err){console.log('*****Muter error',err);}
+                user.name = req.body.name;
+                user.email = req.body.email;
 
-        User.findByIdAndUpdate(req.params.id, req.body , function(err,user){
+                if(req.file){
+
+                    //this is saving the path of the uploaded file in avatar field in the user
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+
+                user.save();
+                return res.redirect('back');
+
+            });
+        }catch(err){
+           
+            req.flash('error', err);
             return res.redirect('back');
-        });
+
+        }
     } else {
+
+        req.flash('error','unaothorized');
         return res.status(401).send('Unauthorized');
     }
    }
